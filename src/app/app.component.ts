@@ -3,12 +3,14 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
+import firebase from 'firebase';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -16,7 +18,16 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+
+      //firebase
+      firebase.initializeApp({
+        apiKey: "AIzaSyB2U5e8m5p3iUE0ZjgWQNDMQjEzkxNIKdU",
+        authDomain: "domotica-6490f.firebaseapp.com",
+        databaseURL: "https://domotica-6490f.firebaseio.com",
+        projectId: "domotica-6490f",
+        storageBucket: "domotica-6490f.appspot.com",
+        messagingSenderId: "407579583169"
+      });
     });
   }
 }
-
