@@ -37,17 +37,18 @@ export class HomePage {
     ref.on("value", gotOne, errData);
     
     function gotOne(data) {
+      debugger;
       let refVal = data.val();
       let changedVar;
       console.log(refVal);
       
-      (refVal = "false") ? changedVar = "true" : changedVar = "false";
+      (refVal.on == "false") ? changedVar = "true" : changedVar = "false";
 
-      database.ref("lightTest/-KwiO6Ls6A3zydDXUtCY").update({ on: changedVar });
+      ref.set({ on: changedVar });
 
-      var updates = {};
-      updates['lightTest/-KwiO6Ls6A3zydDXUtCY/on'] = refVal;
-      database.ref().update(updates);
+      // var updates = {};
+      // updates['lightTest/-KwiO6Ls6A3zydDXUtCY/on'] = refVal;
+      // database.ref().update(updates);
 
       console.log(refVal);
     }
