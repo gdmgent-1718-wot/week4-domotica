@@ -37,7 +37,6 @@ export class HomePage {
     ref.once("value").then(gotOne);
     
     function gotOne(data) {
-      debugger;
       let refVal = data.val();
       let changedVar;
       console.log(refVal);
