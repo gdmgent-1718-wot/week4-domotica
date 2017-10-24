@@ -184,20 +184,20 @@ var HomePage = (function () {
         var attrib = lightSlider.getAttribute('checked');
         console.log(attrib);
         */
-        var id = '-KwiO6Ls6A3zydDXUtCY';
-        var ref = database.ref("lightTest/" + id);
-        ref.on("value", gotOne, errData);
+        // let id = '-KwiO6Ls6A3zydDXUtCY';
+        var ref = database.ref("lightTest/");
+        ref.once("value").then(gotOne);
         function gotOne(data) {
             debugger;
             var refVal = data.val();
             var changedVar;
             console.log(refVal);
             (refVal.on == "false") ? changedVar = "true" : changedVar = "false";
-            ref.set({ on: changedVar });
+            ref.update({ on: changedVar });
+            return;
             // var updates = {};
             // updates['lightTest/-KwiO6Ls6A3zydDXUtCY/on'] = refVal;
             // database.ref().update(updates);
-            console.log(refVal);
         }
         function errData(data) {
             console.log("error");

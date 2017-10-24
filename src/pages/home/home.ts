@@ -32,9 +32,9 @@ export class HomePage {
     console.log(attrib);
     */
 
-    var id = '-KwiO6Ls6A3zydDXUtCY';
-    var ref = database.ref("lightTest/" + id);
-    ref.on("value", gotOne, errData);
+    // let id = '-KwiO6Ls6A3zydDXUtCY';
+    let ref = database.ref("lightTest/");
+    ref.once("value").then(gotOne);
     
     function gotOne(data) {
       debugger;
@@ -44,13 +44,11 @@ export class HomePage {
       
       (refVal.on == "false") ? changedVar = "true" : changedVar = "false";
 
-      ref.set({ on: changedVar });
-
+      ref.update({ on: changedVar });
+      return;
       // var updates = {};
       // updates['lightTest/-KwiO6Ls6A3zydDXUtCY/on'] = refVal;
       // database.ref().update(updates);
-
-      console.log(refVal);
     }
 
     function errData(data){
