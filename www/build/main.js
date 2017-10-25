@@ -168,47 +168,79 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var HomePage = (function () {
     function HomePage(navCtrl) {
         this.navCtrl = navCtrl;
+        this.temp = 0;
     }
     HomePage.prototype.doSomething = function () {
-        console.log("Toggle lights ...");
         var database = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database();
-        /*
-        var lightData = database.ref('lightTest');
-        var data = {
-          on: true
-        }
-        lightData.push(data);
-        */
-        /*
-        let lightSlider = document.querySelector("#lightSlider");
-        var attrib = lightSlider.getAttribute('checked');
-        console.log(attrib);
-        */
-        // let id = '-KwiO6Ls6A3zydDXUtCY';
         var ref = database.ref("lightTest/");
         ref.once("value").then(gotOne);
         function gotOne(data) {
-            debugger;
             var refVal = data.val();
             var changedVar;
-            console.log(refVal);
+            //check to see if ligt is of if so give back true
             (refVal.on == "false") ? changedVar = "true" : changedVar = "false";
+            //update the db
             ref.update({ on: changedVar });
             return;
-            // var updates = {};
-            // updates['lightTest/-KwiO6Ls6A3zydDXUtCY/on'] = refVal;
-            // database.ref().update(updates);
+        }
+    };
+    HomePage.prototype.ionViewDidEnter = function () {
+        var database = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database();
+        var reftemp = database.ref("Temperature/");
+        reftemp.on("value", getTemp, errData);
+        function getTemp(data) {
+            var tempVal = data.val();
+            //set the temperature to the h1
+            document.getElementById('temp').innerHTML = JSON.stringify(tempVal.info) + "°C";
         }
         function errData(data) {
             console.log("error");
         }
-        //database.ref("lightTest/-KwiO6Ls6A3zydDXUtCY").update({ on: "Changed!!" });
+    };
+    HomePage.prototype.DoThething = function () {
+        var database = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database();
+        var storageRef = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.storage();
+        //choose the right firebase table
+        var refCam = database.ref("Camera/");
+        //make the functions execute once
+        refCam.once("value").then(sendRequest).then(function () {
+            //set timeout on getimage function because of the server delay
+            setTimeout(getImage, 5000);
+        });
+        function sendRequest(data) {
+            //set the camera on through firebase
+            refCam.update({ on: "true" });
+        }
+        function getImage() {
+            // Create a reference to the file we want to download
+            var refImg = storageRef.ref('/test.jpg');
+            console.log(refImg);
+            // Get the download URL
+            refImg.getDownloadURL().then(function (url) {
+                document.getElementById("cameraImg").setAttribute('src', url);
+            }).catch(function (error) {
+                switch (error.code) {
+                    case 'storage/object_not_found':
+                        // File doesn't exist
+                        break;
+                    case 'storage/unauthorized':
+                        // User doesn't have permission to access the object
+                        break;
+                    case 'storage/canceled':
+                        // User canceled the upload
+                        break;
+                    case 'storage/unknown':
+                        // Unknown error occurred, inspect the server response
+                        break;
+                }
+            });
+        }
     };
     return HomePage;
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"D:\School\Schooljaar 2017-18\Web of things\week4-domotica\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-item>\n\n      <ion-label> Light</ion-label>\n\n      <ion-toggle id="lightSlider" (ionChange)="doSomething()" checked="false"></ion-toggle>\n\n  </ion-item>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"D:\School\Schooljaar 2017-18\Web of things\week4-domotica\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"D:\School\Schooljaar 2017-18\Web of things\week4-domotica\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-item>\n\n      <ion-label> Light</ion-label>\n\n      <ion-toggle id="lightSlider" (ionChange)="doSomething()" checked="false"></ion-toggle>\n\n  </ion-item>\n\n      <button ion-item (click)=\'DoThething()\'> \n\n      <ion-icon name="camera"></ion-icon>\n\n      click here to take a picture \n\n      </button>\n\n      <h1 id="temp"></h1>\n\n\n\n      <img id="cameraImg">\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"D:\School\Schooljaar 2017-18\Web of things\week4-domotica\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
 ], HomePage);

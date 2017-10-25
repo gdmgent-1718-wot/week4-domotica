@@ -25511,3 +25511,9 @@ ion-navbar.toolbar {
   height: calc(46px + constant(safe-area-inset-top));
   min-height: calc(46px + constant(safe-area-inset-top));
 }
+
+#temp {
+  font-size: 100px;
+  margin: auto;
+  text-align: center;
+}
