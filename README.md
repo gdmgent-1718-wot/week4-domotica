@@ -1,26 +1,24 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Domotica Project WOT
+## Pieter Vleminckx & Brent De Roeck
+### Assignment
+Create a Domotica system with the ionic framework | firebase | raspberry pi
 
-## How to use this template
+#### Ionic-framework
+Install: `npm install -g cordova ionic`
+Start app: `ionic serve`
+Docs: https://ionicframework.com
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
-
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
+#### Raspberry Pi 3
+##### Install
+firebase: 
 ```
-
-Then, to run it, cd into `myTabs` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+sudo pip3 install python-firebase
+sudo pip3 install firebase-admin
 ```
-
-Substitute ios for android if not on a Mac.
-
+ps: Make sure your time is set. Otherwise it won't work!
+---
+google cloud:
+```
+sudo pip install google-cloud
+gcloud auth application-default login
+```
