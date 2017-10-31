@@ -15,8 +15,8 @@ firebase:
 sudo pip3 install python-firebase
 sudo pip3 install firebase-admin
 ```
-ps: Make sure your time is set. Otherwise it won't work!
----
+##### ps: Make sure your time is set. Otherwise it won't work!
+
 google cloud:
 ```
 sudo pip install google-cloud
