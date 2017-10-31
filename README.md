@@ -1,7 +1,5 @@
 # Domotica Project WOT
-===================
 ## Pieter Vleminckx & Brent De Roeck
-----------
 ### Assignment
 Create a Domotica system with the ionic framework | firebase | raspberry pi
 
@@ -23,7 +21,6 @@ sudo pip3 install python-firebase
 sudo pip3 install firebase-admin
 ```
 ###### Ps: Make sure your time is set. Otherwise it won't work!
-/Users/Pieter/Documents/GDM/WOT/week4-domotica/README.md
 google cloud:
 ```
 sudo pip install google-cloud
