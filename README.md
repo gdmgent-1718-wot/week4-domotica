@@ -3,16 +3,29 @@
 ### Assignment
 Create a Domotica system with the ionic framework | firebase | raspberry pi
 
-### parts needed
+### Parts needed
 - raspberry pi 3
 - camera module 
 - sensehat
 
 #### Ionic-framework
-Install: `npm install -g cordova ionic`
-Start app: `ionic serve`
-Docs: https://ionicframework.com
+Create first an app in ionic:
+* Install: `npm install -g cordova ionic`
+* Start app: `ionic serve`
+* [IONIC DOCS](https://ionicframework.com)
 
+#### Firebase
+- Create a firebase database on the [Google Firebase website](https://firebase.google.com)
+- Change to rules to:
+```
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true"
+  }
+}
+```
+###### Ps: Be awere that this is not secure at all || Also : Don't forget to link your firebase in your ionic app.
 #### Raspberry Pi 3
 ##### Install
 firebase: 
