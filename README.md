@@ -33,7 +33,7 @@ firebase:
 sudo pip3 install python-firebase
 sudo pip3 install firebase-admin
 ```
-###### Ps: Make sure your time is set. Otherwise it won't work!
+###### Ps: Make sure your time is set. Otherwise it won't work! `dpkg-reconfigure tzdata`
 google cloud:
 ```
 sudo pip install google-cloud
